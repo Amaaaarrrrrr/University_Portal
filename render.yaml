@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: university-portal-backend
+    env: python
+    plan: free
+    repo: https://github.com/Amaaaarrrrrr/University_Portal.git
+    branch: main
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    rootDir: Server
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://university_portal_db_user:TpCq7z1wjJRn11HNAf8bQ5P5qW3rBgCY@dpg-d0ggbgs9c44c73fi2b4g-a/university_portal_db
+      - key: FLASK_ENV
+        value: development
+      - key: SECRET_KEY
+        value: your_updated_secret_key_here
+      - key: JWT_SECRET_KEY
+        value: super-secret-jwt-key
+
+  - type: web
+    name: university-portal-frontend
+    env: node
+    plan: free
+    repo: https://github.com/Amaaaarrrrrr/University_Portal.git
+    branch: main
+    buildCommand: "npm install && npm run build"
+    startCommand: "serve -s build"
+    rootDir: Client
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://university-portal-backend.onrender.com/api

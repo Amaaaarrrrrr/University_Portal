@@ -16,7 +16,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 from models import db, User, StudentProfile, LecturerProfile, Course, Semester, UnitRegistration,Grade, Announcement, AuditLog, DocumentRequest, Hostel, Room, StudentRoomBooking, FeeStructure, Payment, FeeClearance, Assignment, Registration
 from dotenv import load_dotenv
-
+load_dotenv()
 
 
 # Flask App Config
@@ -41,7 +41,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Initialize Extensions
-load_dotenv()
+
 db.init_app(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
