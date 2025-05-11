@@ -7,6 +7,7 @@ import Button from '../components/common/Button';
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 
+
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -41,12 +42,11 @@ const RegisterPage = () => {
       const response = await axios.post('http://127.0.0.1:5000/api/register', dataToSubmit);
 
       if (response.status === 201) {
-        //  redirect to login page after successful registration
-        printf('Registration successful...');
+        // Redirect to login page after successful registration
         navigate('/login');
       }
     } catch (err) {
-      setError(err.response?.data?.error);
+      setError(err.response?.data?.error || 'Error occurred during registration. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +59,9 @@ const RegisterPage = () => {
   return (
     <>
     <Navbar/>
+    
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+     
       <div className="w-full max-w-md">
         <div className="bg-white rounded-xl shadow-xl overflow-hidden">
           <div className="p-6 bg-blue-600 text-white text-center">
@@ -77,56 +79,48 @@ const RegisterPage = () => {
             )}
 
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <Input
-                  label="Full Name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your full name"
-                  required
-                  icon={<User className="h-5 w-5 text-gray-400" />}
-                />
-              </div>
+              <Input
+                label="Full Name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your full name"
+                required
+                icon={<User className="h-5 w-5 text-gray-400" />}
+              />
 
-              <div className="mb-4">
-                <Input
-                  label="Email Address"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  icon={<Mail className="h-5 w-5 text-gray-400" />}
-                />
-              </div>
+              <Input
+                label="Email Address"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                icon={<Mail className="h-5 w-5 text-gray-400" />}
+              />
 
-              <div className="mb-4">
-                <Input
-                  label="Password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                  icon={<Lock className="h-5 w-5 text-gray-400" />}
-                />
-              </div>
+              <Input
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                icon={<Lock className="h-5 w-5 text-gray-400" />}
+              />
 
-              <div className="mb-6">
-                <Input
-                  label="Confirm Password"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm your password"
-                  required
-                  icon={<Lock className="h-5 w-5 text-gray-400" />}
-                />
-              </div>
+              <Input
+                label="Confirm Password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm your password"
+                required
+                icon={<Lock className="h-5 w-5 text-gray-400" />}
+              />
 
               {/* Role selection */}
-              <div className="mb-5">
+              <div className="my-5">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Register as</label>
                 <div className="grid grid-cols-2 gap-2">
                   {['student', 'lecturer'].map((r) => (
@@ -146,98 +140,84 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              {/* Role-specific fields */}
+              {/* Role-specific profile fields */}
               {role === 'student' && (
                 <>
-                  <div className="mb-4">
-                    <Input
-                      label="Registration Number"
-                      type="text"
-                      name="reg_no"
-                      value={profileData.reg_no || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your registration number"
-                      required
-                      icon={<BookOpen className="h-5 w-5 text-gray-400" />}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Input
-                      label="Program"
-                      type="text"
-                      name="program"
-                      value={profileData.program || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your program"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Input
-                      label="Year of Study"
-                      type="text"
-                      name="year_of_study"
-                      value={profileData.year_of_study || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your year of study"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Input
-                      label="Phone Number"
-                      type="text"
-                      name="phone"
-                      value={profileData.phone || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your phone number"
-                      required
-                      icon={<Phone className="h-5 w-5 text-gray-400" />}
-                    />
-                  </div>
+                  <Input
+                    label="Registration Number"
+                    type="text"
+                    name="reg_no"
+                    value={profileData.reg_no || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your registration number"
+                    required
+                    icon={<BookOpen className="h-5 w-5 text-gray-400" />}
+                  />
+                  <Input
+                    label="Program"
+                    type="text"
+                    name="program"
+                    value={profileData.program || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your program"
+                    required
+                  />
+                  <Input
+                    label="Year of Study"
+                    type="text"
+                    name="year_of_study"
+                    value={profileData.year_of_study || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your year of study"
+                    required
+                  />
+                  <Input
+                    label="Phone Number"
+                    type="text"
+                    name="phone"
+                    value={profileData.phone || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your phone number"
+                    required
+                    icon={<Phone className="h-5 w-5 text-gray-400" />}
+                  />
                 </>
               )}
 
               {role === 'lecturer' && (
                 <>
-                  <div className="mb-4">
-                    <Input
-                      label="Staff Number"
-                      type="text"
-                      name="staff_no"
-                      value={profileData.staff_no || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your staff number"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Input
-                      label="Department"
-                      type="text"
-                      name="department"
-                      value={profileData.department || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your department"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Input
-                      label="Phone Number"
-                      type="text"
-                      name="phone"
-                      value={profileData.phone || ''}
-                      onChange={handleProfileInputChange}
-                      placeholder="Enter your phone number"
-                      required
-                      icon={<Phone className="h-5 w-5 text-gray-400" />}
-                    />
-                  </div>
+                  <Input
+                    label="Staff Number"
+                    type="text"
+                    name="staff_no"
+                    value={profileData.staff_no || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your staff number"
+                    required
+                  />
+                  <Input
+                    label="Department"
+                    type="text"
+                    name="department"
+                    value={profileData.department || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your department"
+                    required
+                  />
+                  <Input
+                    label="Phone Number"
+                    type="text"
+                    name="phone"
+                    value={profileData.phone || ''}
+                    onChange={handleProfileInputChange}
+                    placeholder="Enter your phone number"
+                    required
+                    icon={<Phone className="h-5 w-5 text-gray-400" />}
+                  />
                 </>
               )}
 
-              <Button type="submit" variant="primary" fullWidth disabled={isLoading} className="py-3">
+              <Button type="submit" variant="primary" fullWidth disabled={isLoading} className="py-3 mt-4">
                 {isLoading ? (
                   <span className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -254,11 +234,8 @@ const RegisterPage = () => {
           </div>
 
           <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-            <p className="text-xs text-center text-gray-600">
-              © 2025 University Student Portal. All rights reserved.
-            </p>
             <p className="text-xs text-center text-gray-600 mt-2">
-              <span>Already have an account? </span>
+              <span>Do you have an account? </span>
               <a href="/login" className="text-blue-600 hover:text-blue-800">
                 Login here
               </a>
