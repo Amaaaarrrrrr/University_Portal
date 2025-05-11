@@ -6,7 +6,7 @@ services:
     repo: https://github.com/Amaaaarrrrrr/University_Portal.git
     branch: main
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    startCommand: "gunicorn app:app --bind=0.0.0.0:$PORT"
     rootDir: Server
     envVars:
       - key: DATABASE_URL
