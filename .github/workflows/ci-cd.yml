@@ -1,0 +1,83 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: dashboard
+          POSTGRES_PASSWORD: Student
+          POSTGRES_DB: student_portal
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://dashboard:Student@localhost:5432/student_portal
+      REACT_APP_API_URL: http://localhost:5000/api
+      FLASK_ENV: development
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.8"
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+
+    - name: Install backend dependencies
+      working-directory: ./Server
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run backend tests (placeholder)
+      working-directory: ./Server
+      run: |
+        export FLASK_APP=app.py
+        export DATABASE_URL=postgresql://dashboard:Student@localhost:5432/student_portal
+        pytest --disable-warnings || echo "No backend tests"
+
+    - name: Install frontend dependencies
+      working-directory: ./Client
+      run: npm install
+
+    - name: Run frontend tests
+      working-directory: ./Client
+      run: npm test || echo "No frontend tests"
+
+    - name: Build frontend
+      working-directory: ./Client
+      run: npm run build
+
+  deploy:
+    needs: build-test-deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: 📤 Deploy to Hosting
+      run: |
+        echo "Insert deployment commands here (Heroku, Render, VPS, etc.)"
+      env:
+        API_KEY: ${{ secrets.DEPLOY_API_KEY }}

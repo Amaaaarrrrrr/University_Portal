@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+sqlalchemy = "*"
+werkzeug = "*"
+psycopg2-binary = "*"
+pyjwt = "==2.0.1"
+flask-jwt-extended = "==4.5.2"
+flask-cors = "*"
+flask-sqlalchemy = "*"
+python-dotenv = "*"
+flask-migrate = "*"
+flask-marshmallow = "*"
+marshmallow = "*"
+sqlalchemy-serializer = "*"
+flask-wtf = "*"
+flask-mail = "*"
+twilio = "*"
+flask-login = "*"
+flask-limiter = "*"
+email-validator = "*"
+
+[dev-packages]
+pytest = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.8.13"

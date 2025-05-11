@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Flask and Python environment
+.env
+.venv/
+venv/
+ENV/
+env/
+instance/
+.webassets-cache
+
+# Pytest
+.cache
+.coverage
+.pytest_cache/
+
+# Database
+*.sqlite3
+*.db
+
+# Flask migrations
+migrations/
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# React / Node
+Client/node_modules/
+Client/build/
+Client/.env
+
+# NPM logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage reports
+htmlcov/
+coverage.xml
+
+# Others
+*.egg-info/
+dist/
+build/

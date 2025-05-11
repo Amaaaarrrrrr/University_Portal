@@ -1,0 +1,236 @@
+Register a User
+Method: POST
+URL: http://127.0.0.1:5000/api/register
+Headers:
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "role": "student",
+  "student_profile": {
+    "reg_no": "STU001",
+    "program": "Computer Science",
+    "year_of_study": 2,
+    "phone": "1234567890"
+  }
+}
+Log In a User
+Method: POST
+URL: http://127.0.0.1:5000/api/login
+Headers:
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+Fetch User Profile
+Method: GET
+URL: http://127.0.0.1:5000/api/profile
+Headers:
+Authorization: Bearer <access_token>
+
+Fetch Announcements
+Method: GET
+URL: http://127.0.0.1:5000/api/announcements
+Headers:
+Authorization: Bearer <admin_access_token>
+
+Create Announcement
+Method: POST
+URL: http://127.0.0.1:5000/api/announcements
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "title": "New Semester Announcement",
+  "content": "The new semester starts on June 1st, 2025."
+}
+
+
+Fetch Clearance Status
+Method: GET
+URL: http://127.0.0.1:5000/api/clearance
+Headers:
+Authorization: Bearer <access_token>
+
+Update Clearance Status
+Method: PUT
+URL: http://127.0.0.1:5000/admin/clearance/<student_id>
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "status": "Cleared",
+  "cleared_on": "2025-05-06T12:00:00"
+}
+
+
+Fetch Courses
+Method: GET
+URL: http://127.0.0.1:5000/api/courses?semester_id=1&program=Computer%20Science
+
+Create a Course
+Method: POST
+URL: http://127.0.0.1:5000/api/courses
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "code": "CS102",
+  "title": "Data Structures",
+  "description": "Introduction to data structures",
+  "semester_id": 1,
+  "program": "Computer Science"
+}
+
+Update a Course
+Method: PUT
+URL: http://127.0.0.1:5000/api/courses/1
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "title": "Advanced Data Structures",
+  "description": "In-depth study of data structures"
+}
+
+Delete a Course
+Method: DELETE
+URL: http://127.0.0.1:5000/api/courses/1
+Headers:
+Authorization: Bearer <admin_access_token>
+
+Assign a Lecturer to a Course
+Method: POST
+URL: http://127.0.0.1:5000/admin/assign_lecturer
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "course_id": 1,
+  "lecturer_id": 2
+}
+
+Fetch Fee Structure
+Method: GET
+URL: http://127.0.0.1:5000/api/fee-structure?program_id=1&semester_id=3
+
+Create Fee Structure
+Method: POST
+URL: http://127.0.0.1:5000/api/fee-structure
+Headers:
+Authorization: Bearer <admin_access_token>
+Content-Type: application/json
+
+{
+  "program_id": 1,
+  "semester_id": 3,
+  "amount": 50000,
+  "due_date": "2025-06-01"
+}
+
+Fetch Payments
+Method: GET
+URL: http://127.0.0.1:5000/api/payments
+Headers:
+Authorization: Bearer <access_token>
+
+Create Payment
+Method: POST
+URL: http://127.0.0.1:5000/api/payments
+Headers:
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "fee_structure_id": 1,
+  "amount_paid": 5000,
+  "payment_method": "Credit Card"
+}
+
+Fetch Payment Details
+Method: GET
+URL: http://127.0.0.1:5000/api/payments/1
+Headers:
+Authorization: Bearer <access_token>
+
+Delete Payment
+Method: DELETE
+URL: http://127.0.0.1:5000/api/payments/1
+Headers:
+Authorization: Bearer <access_token>
+
+Fetch Grades
+Method: GET
+URL: http://127.0.0.1:5000/api/grades
+Headers:
+Authorization: Bearer <student_access_token>
+
+Post a Grade
+Method: POST
+URL: http://127.0.0.1:5000/api/grades
+Headers:
+Authorization: Bearer <lecturer_access_token>
+Content-Type: application/json
+
+{
+  "student_id": 9,
+  "course_id": 1,
+  "grade": "A",
+  "semester_id": 3
+}
+
+Delete a Grade
+Method: DELETE
+URL: http://127.0.0.1:5000/api/grades
+Headers:
+Authorization: Bearer <lecturer_access_token>
+Content-Type: application/json
+
+{
+  "grade_id": 1
+}
+
+Fetch Hostels
+Method: GET
+URL: http://127.0.0.1:5000/api/hostels?page=1&per_page=10
+
+Fetch Rooms
+Method: GET
+URL: http://127.0.0.1:5000/api/rooms
+
+Fetch Bookings
+Method: GET
+URL: http://127.0.0.1:5000/api/bookings
+Headers:
+Authorization: Bearer <access_token>
+
+Create a Booking
+Method: POST
+URL: http://127.0.0.1:5000/api/bookings
+Headers:
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "student_id": 9,
+  "room_id": 1,
+  "start_date": "2025-05-01",
+  "end_date": "2025-05-31"
+}
+
+Cancel a Booking
+Method: DELETE
+URL: http://127.0.0.1:5000/api/bookings/1
+Headers:
+Authorization: Bearer <access_token>
+
