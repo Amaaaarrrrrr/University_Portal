@@ -24,8 +24,8 @@ services:
     plan: free
     repo: https://github.com/Amaaaarrrrrr/University_Portal.git
     branch: main
-    buildCommand: "npm install && npm run build"
-    startCommand: "serve -s build"
+    buildCommand: "npm install --legacy-peer-deps && npm run build"
+    startCommand: "npm run preview"
     rootDir: Client
     envVars:
       - key: REACT_APP_API_URL
