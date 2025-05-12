@@ -97,7 +97,7 @@ const LecturerLayout = () => {
             <SidebarLink to="/lecturer/grades" icon={<ClipboardList size={20} />} text="Grade Submission" />
             <SidebarLink to="/lecturer/announcements" icon={<MessageSquare size={20} />} text="Announcements" />
             <SidebarLink to="/lecturer/assignments" icon={<FileText size={20} />} text="Assignments" />
-            <SidebarLink to="/lecturer/auth" icon={<UserCircle size={20} />} text="My Profile" />
+            {/* <SidebarLink to="/lecturer/auth" icon={<UserCircle size={20} />} text="My Profile" /> */}
           </div>
 
           <button

@@ -34,8 +34,9 @@ const UserManagement = () => {
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
+      console.log('Form Values:', values);  // Debugging line
       setLoading(true);
-
+  
       if (currentUser) {
         // Update existing user
         await axios.put(`http://127.0.0.1:5000/api/users/${currentUser.id}`, values);
@@ -45,17 +46,18 @@ const UserManagement = () => {
         await axios.post('http://127.0.0.1:5000/api/register', values);
         message.success('User created successfully');
       }
-
+  
       setVisible(false);
       form.resetFields();
       fetchUsers();
     } catch (error) {
+      console.error(error);  
       message.error(error.response?.data?.error || 'Operation failed');
     } finally {
       setLoading(false);
     }
   };
-
+  
   // Delete user
   const handleDelete = async (id) => {
     try {

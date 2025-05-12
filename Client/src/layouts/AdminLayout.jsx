@@ -27,7 +27,7 @@ const sidebarLinks = [
   { to: '/admin/assign-lecturers', icon: UserCheck, text: 'Assign Lecturers' },
   { to: '/admin/student-registration', icon: ClipboardList, text: 'Registration Approval' },
   { to: '/admin/fee-status', icon: FileCheck, text: 'Fee Clearance Status' },
-  { to: '/admin/auth', icon: UserCircle, text: 'My Profile' },
+  // { to: '/admin/auth', icon: UserCircle, text: 'My Profile' },
 ];
 
 const AdminLayout = () => {
